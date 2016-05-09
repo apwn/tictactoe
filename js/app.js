@@ -20,8 +20,7 @@ var player1 = "Thomas";
 var player2 = "Bob";
 var currentPlayer = player1;
 var winner;
-
-
+var totalMoves = 0;
 
 //var playerGame = {};
 
@@ -56,6 +55,7 @@ for (var r = 0; r < numberOfRows; r++){
 function playerTurn(){
   if (!winner){
     $('.col').off('click');
+    totalMoves++;
     // Find element clicked and change it with player name
     var col = this.className;
     var row = this.parentElement.className;
@@ -83,6 +83,7 @@ function playerTurn(){
     rowWinner();
     verticalWinner();
     diagonalWinner();
+    draw();
     console.log(gameArea);
 
   }
@@ -148,40 +149,38 @@ function verticalWinner(){
   }
 }
 
-// FIND WINNER DIAGONALLY
 function diagonalWinner(){
-  var totDiagLeftRightP1 = 0;
-  var totDiagLeftRightP2 = 0;
-  var totDiagRightLeftP1 = 0;
-  var totDiagRightLeftP2 = 0;
-  var totalOppDiagonallyP1 = numberOfRows-1;
-  var totalOppDiagonallyP2 = numberOfRows-1;
+  var index = 0;
+  var totalMatchesP1 = 0;
+  var totalMatchesP2 = 0;
+  var totalMatchesOppP1 = 0;
+  var totalMatchesOppP2 = 0;
+  var rightToLeft = numberOfRows-1;
   for (prop in gameArea){
-    var row = gameArea[prop];
-    //var rowNumber = 0;
-    if (row[totDiagLeftRightP1] === player1){
-      totDiagLeftRightP1++;
-      console.log(totDiagLeftRightP1 + ' DIAGONALLY');
+
+    var position = gameArea[prop][index];
+    var positionOpp = gameArea[prop][rightToLeft];
+    if (position === player1){
+      totalMatchesP1++;
+      index++;
     }
-    if (row[totDiagLeftRightP2] === player2){
-      totDiagLeftRightP2++;
-      console.log(totDiagLeftRightP2 + ' DIAGONALLY');
+    if (position === player2){
+      totalMatchesP2++;
+      index++;
     }
-    if (row[totalOppDiagonallyP1] === player1) {
-      totalOppDiagonallyP1--;
-      totDiagRightLeftP1++;
-      console.log(totDiagRightLeftP1 + ' DIAGONALLY OPP');
+    if (positionOpp === player1) {
+      rightToLeft--;
+      totalMatchesOppP1++;
     }
-    if (row[totalOppDiagonallyP2] === player2) {
-      totalOppDiagonallyP2--;
-      totDiagRightLeftP2++;
-      console.log(totDiagRightLeftP2 + ' DIAGONALLY OPP');
+    if (positionOpp === player2) {
+      rightToLeft--;
+      totalMatchesOppP2++;
     }
-    if (totDiagRightLeftP1 === numberOfCols || totDiagLeftRightP1 === numberOfCols){
+    if (totalMatchesP1 === numberOfRows || totalMatchesOppP1 === numberOfRows){
       console.log('WINNER DIAGONALLY ' + player1);
       winner = player1;
       return winner;
-    } else if (totDiagRightLeftP2 === numberOfCols || totDiagLeftRightP2 === numberOfCols) {
+    } else if (totalMatchesP2 === numberOfRows || totalMatchesOppP2 === numberOfRows) {
       console.log('WINNER DIAGONALLY ' + player2);
       winner = player2;
       return winner;
@@ -189,8 +188,13 @@ function diagonalWinner(){
   }
 }
 
-
-
+// If all moves have been played and there's no winner, then it is draw
+function draw(){
+  var totalMovesPossible = numberOfRows * numberOfCols;
+  if (totalMoves === totalMovesPossible && !winner){
+    console.log('draw');
+  }
+}
 
 
 
