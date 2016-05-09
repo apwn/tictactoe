@@ -26,6 +26,7 @@ var playerTotalTurns;
 var player1Turns = [];
 var player2Turns = [];
 
+
 ////////////////////////////////////////////////
 // CREATION OF GAME AREA
 // PUSH ALL ROWS AND COLS TO OBJECT gameArea
@@ -42,39 +43,16 @@ for (var r = 0; r < numberOfRows; r++){
 }
 
  console.log(gameArea);
- //console.log(playerGame);
 
 ////////////////////////////////////////////////
-// USER SELECTION
-// SELECT A BOX IN THE GAME
-////////////////////////////////////////////////
-
-// function boxSelected(currentPlayer){
-//   var col = this.className;
-//   var row = this.parentElement.className;
-//   var col2 = col.split(' ');
-//   var row2 = row.split(' ');
-//   var playerCol = col2[1];
-//   var playerRow = row2[1];
-//   var elementToChange = gameArea[playerRow].indexOf(playerCol);
-//   if (elementToChange != -1){
-//     gameArea[playerRow][elementToChange] = player;
-//   } else {
-//     alert("already played");
-//   }
-//
-//   // add function to check winner
-//   console.log(gameArea);
-// }
-
-////////////////////////////////////////////////
-// USER TURNS
+// USER TURN
 // AND BOX SELECTION
 ////////////////////////////////////////////////
 
 function playerTurn(){
-  //while (!winner){
+  if (!winner){
     $('.col').off('click');
+    // Find element clicked and change it with player name
     var col = this.className;
     var row = this.parentElement.className;
     var col2 = col.split(' ');
@@ -98,26 +76,62 @@ function playerTurn(){
     }
     $('footer').text(currentPlayer + " it's your turn");
     $('.col').on('click', playerTurn);
-    // add function to check winner
+    rowWinner();
+    verticalWinner();
     console.log(gameArea);
 
-  //}
+  }
 }
-
 
 $('.col').on('click', playerTurn);
 
 
+////////////////////////////////////////////////
+// FIND THE WINNER
+// OR DRAW
+////////////////////////////////////////////////
+
+
+function rowWinner(){
+
+  for (prop in gameArea){
+
+    var totalMatchesP2 = 0;
+    var rowNumber = gameArea[prop];
+    console.log(rowNumber);
+    // FIND WINNER IN SAME ROW
+    var first = rowNumber[0];
+    if (rowNumber.every(elem => elem === first)){
+      winner = first;
+      console.log('Winner is ' + winner);
+      return winner;
+    }
+  }
+}
 
 
 
+function verticalWinner(){
+  for (prop in gameArea){
+    var totalMatchesP1 = 0;
+    var row = gameArea[prop];
+    for (var i = 0; i < row.length; i++) {
+      if (row[i] === player1){
+        var player1Position = [i];
 
-
-
-
-
-
-
+      }
+    }
+  }
+  for (prop2 in gameArea){
+    if (gameArea[prop2][player1Position] === player1){
+      totalMatchesP1++;
+      console.log(totalMatchesP1);
+      if(totalMatchesP1 === 3){
+        console.log('WINNER');
+      }
+    }
+  }
+}
 
 
 
