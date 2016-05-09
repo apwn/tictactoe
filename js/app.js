@@ -54,9 +54,15 @@ function boxSelected(){
   var row2 = row.split(' ');
   var playerCol = col2[1];
   var playerRow = row2[1];
-  var elementToChange = gameArea[playerRow].indexOf(playerCol)
-  gameArea[playerRow][elementToChange] = player1;
+  var elementToChange = gameArea[playerRow].indexOf(playerCol);
+  if (elementToChange != -1){
+    gameArea[playerRow][elementToChange] = player1;
+  } else {
+    alert("already played");
+  }
+
   // add function to check winner
+  console.log(gameArea);
 }
 
 $('.col').on('click', boxSelected);
