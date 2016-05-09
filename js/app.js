@@ -3,7 +3,8 @@ TIC TAC TOE
 Version 0.25
 
 line 21: Creation of Game Area
-line xx: User selection
+line xx: User Turns
+line xx: Find the Winner Functions
 **********************************************/
 
 // Wait for page to load before running any JS
@@ -19,6 +20,9 @@ var player1 = "Thomas";
 var player2 = "Bob";
 var currentPlayer = player1;
 var winner;
+
+
+
 //var playerGame = {};
 
 // Stats
@@ -78,6 +82,7 @@ function playerTurn(){
     $('.col').on('click', playerTurn);
     rowWinner();
     verticalWinner();
+    diagonalWinner();
     console.log(gameArea);
 
   }
@@ -91,12 +96,9 @@ $('.col').on('click', playerTurn);
 // OR DRAW
 ////////////////////////////////////////////////
 
-
+// FIND WINNER HORIZONTALLY
 function rowWinner(){
-
   for (prop in gameArea){
-
-    var totalMatchesP2 = 0;
     var rowNumber = gameArea[prop];
     console.log(rowNumber);
     // FIND WINNER IN SAME ROW
@@ -110,15 +112,18 @@ function rowWinner(){
 }
 
 
-
+// FIND WINNER VERTICALLY
 function verticalWinner(){
   for (prop in gameArea){
     var totalMatchesP1 = 0;
+    var totalMatchesP2 = 0;
     var row = gameArea[prop];
     for (var i = 0; i < row.length; i++) {
       if (row[i] === player1){
         var player1Position = [i];
-
+      }
+      if (row[i] === player2) {
+        var player2Position = [i];
       }
     }
   }
@@ -126,14 +131,63 @@ function verticalWinner(){
     if (gameArea[prop2][player1Position] === player1){
       totalMatchesP1++;
       console.log(totalMatchesP1);
-      if(totalMatchesP1 === 3){
-        console.log('WINNER');
+        if(totalMatchesP1 === numberOfCols){
+          console.log('WINNER ' + player1);
+          winner = player1;
+          return winner;
+      }
+    }
+    if (gameArea[prop2][player2Position] === player2){
+      totalMatchesP2++;
+        if(totalMatchesP2 === numberOfCols){
+          console.log('WINNER ' + player2);
+          winner = player2;
+          return winner;
       }
     }
   }
 }
 
-
+// FIND WINNER DIAGONALLY
+function diagonalWinner(){
+  var totDiagLeftRightP1 = 0;
+  var totDiagLeftRightP2 = 0;
+  var totDiagRightLeftP1 = 0;
+  var totDiagRightLeftP2 = 0;
+  var totalOppDiagonallyP1 = numberOfRows-1;
+  var totalOppDiagonallyP2 = numberOfRows-1;
+  for (prop in gameArea){
+    var row = gameArea[prop];
+    //var rowNumber = 0;
+    if (row[totDiagLeftRightP1] === player1){
+      totDiagLeftRightP1++;
+      console.log(totDiagLeftRightP1 + ' DIAGONALLY');
+    }
+    if (row[totDiagLeftRightP2] === player2){
+      totDiagLeftRightP2++;
+      console.log(totDiagLeftRightP2 + ' DIAGONALLY');
+    }
+    if (row[totalOppDiagonallyP1] === player1) {
+      totalOppDiagonallyP1--;
+      totDiagRightLeftP1++;
+      console.log(totDiagRightLeftP1 + ' DIAGONALLY OPP');
+    }
+    if (row[totalOppDiagonallyP2] === player2) {
+      totalOppDiagonallyP2--;
+      totDiagRightLeftP2++;
+      console.log(totDiagRightLeftP2 + ' DIAGONALLY OPP');
+    }
+    if (totDiagRightLeftP1 === numberOfCols || totDiagLeftRightP1 === numberOfCols){
+      console.log('WINNER DIAGONALLY ' + player1);
+      winner = player1;
+      return winner;
+    } else if (totDiagRightLeftP2 === numberOfCols || totDiagLeftRightP2 === numberOfCols) {
+      console.log('WINNER DIAGONALLY ' + player2);
+      winner = player2;
+      return winner;
+    }
+  }
+}
 
 
 
