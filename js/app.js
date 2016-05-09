@@ -16,7 +16,9 @@ var gameArea = {};
 
 // Player info
 var player1 = "Thomas";
-var player2;
+var player2 = "Bob";
+var currentPlayer = player1;
+var winner;
 //var playerGame = {};
 
 // Stats
@@ -47,29 +49,63 @@ for (var r = 0; r < numberOfRows; r++){
 // SELECT A BOX IN THE GAME
 ////////////////////////////////////////////////
 
-function boxSelected(){
-  var col = this.className;
-  var row = this.parentElement.className;
-  var col2 = col.split(' ');
-  var row2 = row.split(' ');
-  var playerCol = col2[1];
-  var playerRow = row2[1];
-  var elementToChange = gameArea[playerRow].indexOf(playerCol);
-  if (elementToChange != -1){
-    gameArea[playerRow][elementToChange] = player1;
-  } else {
-    alert("already played");
-  }
+// function boxSelected(currentPlayer){
+//   var col = this.className;
+//   var row = this.parentElement.className;
+//   var col2 = col.split(' ');
+//   var row2 = row.split(' ');
+//   var playerCol = col2[1];
+//   var playerRow = row2[1];
+//   var elementToChange = gameArea[playerRow].indexOf(playerCol);
+//   if (elementToChange != -1){
+//     gameArea[playerRow][elementToChange] = player;
+//   } else {
+//     alert("already played");
+//   }
+//
+//   // add function to check winner
+//   console.log(gameArea);
+// }
 
-  // add function to check winner
-  console.log(gameArea);
+////////////////////////////////////////////////
+// USER TURNS
+// AND BOX SELECTION
+////////////////////////////////////////////////
+
+function playerTurn(){
+  //while (!winner){
+    $('.col').off('click');
+    var col = this.className;
+    var row = this.parentElement.className;
+    var col2 = col.split(' ');
+    var row2 = row.split(' ');
+    var playerCol = col2[1];
+    var playerRow = row2[1];
+    var elementToChange = gameArea[playerRow].indexOf(playerCol);
+    // Check if element has already been played or not
+    if (elementToChange != -1){
+      gameArea[playerRow][elementToChange] = currentPlayer;
+      // Change of player
+      if (currentPlayer === player1){
+        console.log("ok");
+        currentPlayer = player2;
+      } else if (currentPlayer === player2) {
+        console.log("ok2");
+        currentPlayer = player1;
+      }
+    } else {
+      alert("already played");
+    }
+    $('footer').text(currentPlayer + " it's your turn");
+    $('.col').on('click', playerTurn);
+    // add function to check winner
+    console.log(gameArea);
+
+  //}
 }
 
-$('.col').on('click', boxSelected);
 
-//console.log(classes2);
-
-
+$('.col').on('click', playerTurn);
 
 
 
