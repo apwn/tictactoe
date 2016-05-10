@@ -108,6 +108,36 @@ button {
     font-size: 18px;
 }
 
+.play-game:hover {
+  background: #ffb84d;
+}
+
+.alert-parent {
+  background: rgba(166, 166, 166, .7);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.alert {
+  position: absolute;
+  height: 180px;
+  width: 400px;
+  top: 30%;
+  left: 50%;
+  margin-left: -200px;
+  background: #ffc266;
+  border: 2px dashed #000;
+  color: #000;
+}
+
+.closeAlertBox {
+  padding: 5px;
+  margin-top: 30px;
+  text-decoration: underline;
+}
+
 /******************************************************
 ddd
 ******************************************************/
