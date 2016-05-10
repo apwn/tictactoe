@@ -60,6 +60,8 @@ $(function() {
         }
         var fontSize = $('.col').height() * 0.75 + 'px';
         $('.col').css('font-size', fontSize);
+        $('.player1').addClass('your-turn');
+        $('footer').html('<p>' + currentPlayer + ' it\'s your turn');
     }
 
 
@@ -129,10 +131,7 @@ $(function() {
             if (rowNumber.every(elem => elem === first)) {
                 winner = first;
                 console.log('Winner is ' + winner);
-                $('.gamearea').css('opacity','0.2');
-                $('.end-message')
-                .html('<p>Winner is ..... '+ winner.toUpperCase() +'</p><button type="button" name="newgame">PLAY NEW GAME</button>')
-                .css('display','block');
+                winnerDisplay();
                 return winner;
             }
         }
@@ -162,10 +161,7 @@ $(function() {
                 if (totalMatchesP1 === numberOfCols) {
                     console.log('WINNER ' + player1);
                     winner = player1;
-                    $('.gamearea').css('opacity','0.2');
-                    $('.end-message')
-                    .html('<p>Winner is ..... '+ winner.toUpperCase() +'</p><button type="button" name="newgame">PLAY NEW GAME</button>')
-                    .css('display','block');
+                    winnerDisplay();
                     return winner;
                 }
             }
@@ -174,10 +170,7 @@ $(function() {
                 if (totalMatchesP2 === numberOfCols) {
                     console.log('WINNER ' + player2);
                     winner = player2;
-                    $('.gamearea').css('opacity','0.2');
-                    $('.end-message')
-                    .html('<p>Winner is ..... '+ winner.toUpperCase() +'</p><button type="button" name="newgame">PLAY NEW GAME</button>')
-                    .css('display','block');
+                    winnerDisplay();
                     return winner;
                 }
             }
@@ -215,24 +208,18 @@ $(function() {
             if (totalMatchesP1 === numberOfRows || totalMatchesOppP1 === numberOfRows) {
                 console.log('WINNER DIAGONALLY ' + player1);
                 winner = player1;
-                $('.gamearea').css('opacity','0.2');
-                $('.end-message')
-                .html('<p>Winner is ..... '+ winner.toUpperCase() +'</p><button type="button" name="newgame">PLAY NEW GAME</button>')
-                .css('display','block');
+                winnerDisplay();
                 return winner;
             } else if (totalMatchesP2 === numberOfRows || totalMatchesOppP2 === numberOfRows) {
                 console.log('WINNER DIAGONALLY ' + player2);
                 winner = player2;
-                $('.gamearea').css('opacity','0.2');
-                $('.end-message')
-                .html('<p>Winner is ..... '+ winner.toUpperCase() +'</p><button type="button" name="newgame">PLAY NEW GAME</button>')
-                .css('display','block');
+                winnerDisplay();
                 return winner;
             }
         }
     }
 
-    // If all moves have been played and there's no winner, then it is draw
+    // DRAW
     function draw() {
         var totalMovesPossible = numberOfRows * numberOfCols;
         if (totalMoves === totalMovesPossible && !winner) {
@@ -241,9 +228,32 @@ $(function() {
             $('.end-message')
             .html('<p>... DRAW ... </p><button type="button" name="newgame">PLAY NEW GAME</button>')
             .css('display','block');
+            playNewGame();
         }
     }
 
+    // DISPLAY WINNER
+    function winnerDisplay(){
+      $('.gamearea').css('opacity','0.2');
+      $('.end-message')
+      .html('<p>Winner is ..... '+ winner.toUpperCase() +'</p><button type="button" name="newgame">PLAY NEW GAME</button>')
+      .css('display','block');
+      $('footer').html('<p>Winner is '+winner+'!</p>');
+      playNewGame();
+    }
+
+    // PLAY NEW GAME BUTTON
+    function playNewGame(){
+    $('button[name="newgame"]').on('click', function(){
+      $('.end-message').css('display','none');
+      $('.gamearea').css('opacity','1').empty();
+      winner = undefined;
+      totalMoves = 0;
+      $('.player2').removeClass('your-turn');
+      $('.player1').removeClass('your-turn');
+      generateGameArea();
+    });
+    }
 
     ////////////////////////////////////////////////
     // SPLASH PAGE
