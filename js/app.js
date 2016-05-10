@@ -61,12 +61,8 @@ function generateGameArea(){
 function playerTurn(){
   console.log('WORKIIIN?');
   if (!winner){
-    //$('.col').off('click');
-    totalMoves++;
     // Find element clicked and change it with player name
     var col = this.className;
-    console.log(player1);
-    console.log(player2);
     var row = this.parentElement.className;
     var col2 = col.split(' ');
     var row2 = row.split(' ');
@@ -82,15 +78,17 @@ function playerTurn(){
       if (currentPlayer === player1){
         $(classOfRow + ' ' + classOfCol).text(player1Token);
         currentPlayer = player2;
+        totalMoves++;
+        //$('.gamearea').off('click', '.col');
       } else if (currentPlayer === player2) {
         $(classOfRow + ' ' + classOfCol).text(player2Token);
         currentPlayer = player1;
+        totalMoves++;
       }
     } else {
       alert("already played");
     }
     $('footer').text(currentPlayer + " it's your turn");
-    $('.col').on('click', playerTurn);
     rowWinner();
     verticalWinner();
     diagonalWinner();
@@ -100,7 +98,7 @@ function playerTurn(){
   }
 }
 
-$('.gamearea').on('click', '.col', playerTurn);
+ $('.gamearea').on('click','.col', playerTurn);
 
 
 ////////////////////////////////////////////////
