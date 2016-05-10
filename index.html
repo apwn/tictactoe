@@ -8,12 +8,46 @@
   <script src="js/app.js"></script>
 </head>
 <body>
+  <div class="splash">
+    <div class="header">Are you ready to play Tic Tac Toe on Steroids?</div>
+    <div class="player-input">
+      <div class="player1-input">
+        <h2>Player 1</h2>
+        <input type="text" name="name-player1" placeholder="Please enter your name..." class="name-text">
+      </div>
+      <div class="player2-input">
+        <h2>Player 2</h2>
+        <input type="text" name="name-player2" placeholder="Please enter your name..." class="name-text">
+      </div>
+    </div>
+    <div class="grid-size">
+        <h2>Pick your grid size</h2>
+        <div class="grid-selection 3">
+          <button type="button" name="button" value="3x3">3x3</button>
+        </div>
+        <div class="grid-selection 4">
+          <button type="button" name="button" value="4x4">4x4</button>
+        </div>
+        <div class="grid-selection 5">
+          <button type="button" name="button" value="5x5">5x5</button>
+        </div>
+        <div class="grid-selection 6">
+          <button type="button" name="button" value="6x6">6x6</button>
+        </div>
+        <p>
+          Or if you feel adventurous you can enter the number of rows you want...
+          <input type="text" name="rows" placeholder="3" class="row-input">
+        </p>
+    </div>
+  </div>
   <header>
     <h1>Tic Tac Toe</h1>
   </header>
 
   <section id="game">
-
+    <div class="player1">Player 1</div>
+    <div class="gamearea"></div>
+    <div class="player2">Player 2</div>
   </section>
 
   <section id="stats">

@@ -1,3 +1,8 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   height: 100%;
   width: 100%;
@@ -5,4 +10,101 @@ body {
 
 h1 {
   text-align: center;
+}
+
+#game {
+  width: 100%;
+}
+
+/******************************************************
+SPLASH PAGE
+******************************************************/
+
+.splash{
+background: rgba(0, 0, 0, 0.9);;
+height: 100%;
+width: 100%;
+color: #f3f3f3;
+position: absolute;
+top:0;
+text-align: center;
+}
+
+.header {
+  text-align: center;
+  margin: 50px;
+  font-size: 3em;
+}
+
+.player1-input, .player2-input{
+  width: 49%;
+  display: inline-block;
+
+}
+
+.name-text {
+  outline: none;
+}
+
+.player1-input{
+  border-right: 1px dashed #f3f3f3;
+}
+
+.grid-size {
+  height: 50px;
+}
+
+.grid-selection {
+  display: inline-block;
+  width: 15%;
+}
+
+button {
+  border: none;
+  width: 80px;
+  height: 40px;
+}
+
+.row-input{
+  display: inline-block;
+  width: 30px;
+  outline: none;
+}
+
+.grid-size p {
+  margin-top: 30px;
+}
+
+.selected {
+  background: blue;
+}
+
+/******************************************************
+ddd
+******************************************************/
+
+.player1, .player2 {
+  width: 20%;
+  height: 50px;
+  display: inline-block;
+  float: left;
+  text-align: center;
+}
+
+.gamearea {
+  width: 60%;
+  margin: 0 auto;
+  display: inline-block;
+  float: left;
+}
+
+.row {
+  height: 50px;
+  display: flex;
+}
+
+.col {
+  border: 1px solid #000;
+  display: inline-block;
+  height: 50px;
 }

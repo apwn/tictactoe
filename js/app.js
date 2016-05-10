@@ -3,8 +3,8 @@ TIC TAC TOE
 Version 0.25
 
 line 21: Creation of Game Area
-line xx: User Turns
-line xx: Find the Winner Functions
+line 34: User Turns
+line 96: Find the Winner Functions
 **********************************************/
 
 // Wait for page to load before running any JS
@@ -18,6 +18,8 @@ var gameArea = {};
 // Player info
 var player1 = "Thomas";
 var player2 = "Bob";
+var player1Token = "X";
+var player2Token = "O";
 var currentPlayer = player1;
 var winner;
 var totalMoves = 0;
@@ -36,11 +38,11 @@ var player2Turns = [];
 ////////////////////////////////////////////////
 
 for (var r = 0; r < numberOfRows; r++){
-  $('<div>', {class:"row " + "row"+r}).css({width: '60%', height: '50px', margin: '0 auto'}).appendTo('#game');
+  $('<div>', {class:"row " + "row"+r}).appendTo('.gamearea');
     gameArea['row'+r] = [];
     //playerGame['row'+r] = [];
   for (var c = 0; c < numberOfCols; c++) {
-    $('<div>', {class:"col " + "col"+c}).css({width: 100/numberOfCols-1 + '%', height: '50px', border: '1px solid #000', display: 'inline-block'}).appendTo('.row' + r);
+    $('<div>', {class:"col " + "col"+c}).css({width: 100/numberOfCols-1 + '%'}).appendTo('.row' + r);
     gameArea['row'+r].push('col'+c);
   }
 }
@@ -62,17 +64,19 @@ function playerTurn(){
     var col2 = col.split(' ');
     var row2 = row.split(' ');
     var playerCol = col2[1];
+    var classOfCol = '.'+playerCol;
     var playerRow = row2[1];
+    var classOfRow = '.'+playerRow;
     var elementToChange = gameArea[playerRow].indexOf(playerCol);
     // Check if element has already been played or not
     if (elementToChange != -1){
       gameArea[playerRow][elementToChange] = currentPlayer;
       // Change of player
       if (currentPlayer === player1){
-        console.log("ok");
+        $(classOfRow + ' ' + classOfCol).text(player1Token);
         currentPlayer = player2;
       } else if (currentPlayer === player2) {
-        console.log("ok2");
+        $(classOfRow + ' ' + classOfCol).text(player2Token);
         currentPlayer = player1;
       }
     } else {
@@ -149,6 +153,7 @@ function verticalWinner(){
   }
 }
 
+//FIND WINNER DIAGONALLY
 function diagonalWinner(){
   var index = 0;
   var totalMatchesP1 = 0;
@@ -197,9 +202,28 @@ function draw(){
 }
 
 
+////////////////////////////////////////////////
+// SPLASH PAGE
+// FIND SIZE OF GRID
+////////////////////////////////////////////////
 
-
-
+  $('.grid-size button').on('click', function(){
+    var buttonValue = $(this).val();
+    var selected = $('.selected');
+    var selectedItemValue = $('.selected').val();
+    console.log(buttonValue);
+    console.log(selectedItemValue);
+    console.log(selected[0]);
+    if (!selected[0]) {
+      $(this).addClass('selected');
+      console.log(this);
+    } else if (buttonValue !== selectedItemValue){
+      $('.selected').removeClass('selected');
+      $(this).addClass('selected');
+    } else {
+      $('.selected').removeClass('selected');
+    }
+  });
 
 
 
