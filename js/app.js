@@ -20,7 +20,7 @@ var player1;
 var player2;
 var player1Token = "X";
 var player2Token = "O";
-var currentPlayer = player1;
+var currentPlayer;
 var winner;
 var totalMoves = 0;
 
@@ -38,8 +38,11 @@ var player2Turns = [];
 ////////////////////////////////////////////////
 
 function generateGameArea(){
+  $('.player1').text(player1);
+  $('.player2').text(player2);
+  currentPlayer = player1;
   for (var r = 0; r < numberOfRows; r++){
-    $('<div>', {class:"row " + "row"+r}).appendTo('.gamearea');
+    $('<div>', {class:"row " + "row"+r}).css({height: 100/numberOfRows-1 + '%'}).appendTo('.gamearea');
       gameArea['row'+r] = [];
       //playerGame['row'+r] = [];
     for (var c = 0; c < numberOfCols; c++) {
@@ -48,7 +51,7 @@ function generateGameArea(){
     }
   }
 }
- console.log(gameArea);
+
 
 ////////////////////////////////////////////////
 // USER TURN
@@ -56,11 +59,14 @@ function generateGameArea(){
 ////////////////////////////////////////////////
 
 function playerTurn(){
+  console.log('WORKIIIN?');
   if (!winner){
-    $('.col').off('click');
+    //$('.col').off('click');
     totalMoves++;
     // Find element clicked and change it with player name
     var col = this.className;
+    console.log(player1);
+    console.log(player2);
     var row = this.parentElement.className;
     var col2 = col.split(' ');
     var row2 = row.split(' ');
@@ -94,7 +100,7 @@ function playerTurn(){
   }
 }
 
-$('.col').on('click', playerTurn);
+$('.gamearea').on('click', '.col', playerTurn);
 
 
 ////////////////////////////////////////////////
@@ -250,6 +256,7 @@ function draw(){
       numberOfCols = sizeBoxNumber;
       player1 = inputPlayer1;
       player2 = inputPlayer2;
+      $('.play-game').off('click');
       generateGameArea();
       $('.splash').css('display','none');
     } else if (rowInput){
@@ -257,6 +264,7 @@ function draw(){
       numberOfCols = rowInput;
       player1 = inputPlayer1;
       player2 = inputPlayer2;
+      $('.play-game').off('click');
       generateGameArea();
       $('.splash').css('display','none');
     }
@@ -264,10 +272,13 @@ function draw(){
       $('.closeAlertBox').on('click', function(){
         $('.alert-parent').css('display','none');
       })
+
   })
 
 
-
-
+// $('div').on('click',function() {
+//     var theClass = this.className;  // "this" is the element clicked
+//     console.log( theClass );
+// });
 
   });
