@@ -11,8 +11,8 @@ line 96: Find the Winner Functions
 $(function(){
 
 // Number or Rows and colums the game should have
-var numberOfRows = 3;
-var numberOfCols = 3;
+var numberOfRows;
+var numberOfCols;
 var gameArea = {};
 
 // Player info
@@ -59,7 +59,6 @@ function generateGameArea(){
 ////////////////////////////////////////////////
 
 function playerTurn(){
-  console.log('WORKIIIN?');
   if (!winner){
     // Find element clicked and change it with player name
     var col = this.className;
@@ -78,17 +77,21 @@ function playerTurn(){
       if (currentPlayer === player1){
         $(classOfRow + ' ' + classOfCol).text(player1Token);
         currentPlayer = player2;
+        $('.player2').addClass('your-turn');
+        $('.player1').removeClass('your-turn');
         totalMoves++;
         //$('.gamearea').off('click', '.col');
       } else if (currentPlayer === player2) {
         $(classOfRow + ' ' + classOfCol).text(player2Token);
         currentPlayer = player1;
+        $('.player1').addClass('your-turn');
+        $('.player2').removeClass('your-turn');
         totalMoves++;
       }
     } else {
       alert("already played");
     }
-    $('footer').text(currentPlayer + " it's your turn");
+    $('footer').html('<p>' + currentPlayer + ' it\'s your turn');
     rowWinner();
     verticalWinner();
     diagonalWinner();
@@ -140,8 +143,9 @@ function verticalWinner(){
   for (prop2 in gameArea){
     if (gameArea[prop2][player1Position] === player1){
       totalMatchesP1++;
+      console.log(numberOfCols);
       console.log(totalMatchesP1);
-        if(totalMatchesP1 === numberOfCols){
+        if (totalMatchesP1 === numberOfCols){
           console.log('WINNER ' + player1);
           winner = player1;
           return winner;
@@ -149,7 +153,7 @@ function verticalWinner(){
     }
     if (gameArea[prop2][player2Position] === player2){
       totalMatchesP2++;
-        if(totalMatchesP2 === numberOfCols){
+        if (totalMatchesP2 === numberOfCols){
           console.log('WINNER ' + player2);
           winner = player2;
           return winner;
@@ -250,16 +254,16 @@ function draw(){
       $('<div>',{class: 'alert-parent'}).appendTo('.splash');
       $('<div>',{class: 'alert'}).html('<p><br>Sorry I can\'t read your mind...<br><br>You need to tell me the size of the grid</p><p class="closeAlertBox">(close window)</p>').appendTo('.alert-parent');
     }  else if ((sizeBoxSelected && rowInput) || sizeBoxSelected){
-      numberOfRows = sizeBoxNumber;
-      numberOfCols = sizeBoxNumber;
+      numberOfRows = parseInt(sizeBoxNumber);
+      numberOfCols = parseInt(sizeBoxNumber);
       player1 = inputPlayer1;
       player2 = inputPlayer2;
       $('.play-game').off('click');
       generateGameArea();
       $('.splash').css('display','none');
     } else if (rowInput){
-      numberOfRows = rowInput;
-      numberOfCols = rowInput;
+      numberOfRows = parseInt(rowInput);
+      numberOfCols = parseInt(rowInput);
       player1 = inputPlayer1;
       player2 = inputPlayer2;
       $('.play-game').off('click');
@@ -274,9 +278,5 @@ function draw(){
   })
 
 
-// $('div').on('click',function() {
-//     var theClass = this.className;  // "this" is the element clicked
-//     console.log( theClass );
-// });
 
   });

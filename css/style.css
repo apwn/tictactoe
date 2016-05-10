@@ -17,6 +17,7 @@ h1 {
 
 #game {
   width: 100%;
+  height: 580px;
 }
 
 /******************************************************
@@ -146,18 +147,22 @@ ddd
 
 .player1, .player2 {
   width: 20%;
-  height: 50px;
+  height: 580px;
   display: inline-block;
+  padding: 50px 0;
+  font-size: 1.2em;
   float: left;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .gamearea {
   width: 60%;
-  height: 600px;
+  height: 580px;
   margin: 0 auto;
   display: inline-block;
   float: left;
+  color: #000;
 }
 
 .row {
@@ -169,4 +174,24 @@ ddd
   border: 1px solid #000;
   display: inline-block;
   background: #fff;
+}
+
+.your-turn{
+  color: #ffb84d;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+footer{
+  width: 70%;
+  height:50px;
+  margin: 0 auto;
+  text-align: center;
+  border: 1px dashed #f3f3f3;
+}
+
+footer p {
+  display: inline-block;
 }
