@@ -1,144 +1,126 @@
 body, html {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
-
 body {
-  height: 100%;
-  width: 100%;
-  font-family: 'Exo 2', sans-serif;
-  background: #000;
-  color: #f6f6f6;
+    height: 100%;
+    width: 100%;
+    font-family: 'Exo 2', sans-serif;
+    background: #000;
+    color: #f6f6f6;
 }
-
 h1 {
-  text-align: center;
+    text-align: center;
 }
-
 #game {
-  width: 100%;
-  height: 580px;
+    width: 100%;
+    height: 540px;
 }
 
 /******************************************************
 SPLASH PAGE
 ******************************************************/
 
-.splash{
-background: rgba(0, 0, 0, 0.9);;
-height: 100%;
-width: 100%;
-color: #f3f3f3;
-position: absolute;
-top:0;
-text-align: center;
+.splash {
+    background: rgba(0, 0, 0, 0.9);
+    ;
+    height: 100%;
+    width: 100%;
+    color: #f3f3f3;
+    position: absolute;
+    top: 0;
+    text-align: center;
 }
-
 .header {
-  text-align: center;
-  margin: 50px 50px 30px;
-  font-size: 3em;
+    text-align: center;
+    margin: 50px 50px 30px;
+    font-size: 3em;
 }
-
 .player-input {
-  border: 1px dashed #f3f3f3;
-  width: 80%;
-  margin: 0 auto;
+    border: 1px dashed #f3f3f3;
+    width: 80%;
+    margin: 0 auto;
 }
-
-.player1-input, .player2-input{
-  width: 40%;
-  display: inline-block;
-  padding: 10px 0 40px;
+.player1-input, .player2-input {
+    width: 49%;
+    display: inline-block;
+    padding: 10px 0 40px;
 }
-
 .name-text {
-  outline: none;
-  height: 30px;
-  text-align: center;
-  font-size: 1em;
+    outline: none;
+    height: 30px;
+    text-align: center;
+    font-size: 1em;
 }
-
-.player1-input{
-  border-right: 1px dashed #f3f3f3;
+.player1-input {
+    border-right: 1px dashed #f3f3f3;
 }
-
 .grid-size {
-  height: auto;
-  width: 80%;
-  margin: 40px auto 0;
-  border: 1px dashed #f3f3f3;
-  padding: 10px;
-  font-size: 1.1em;
+    height: auto;
+    width: 80%;
+    margin: 40px auto 0;
+    border: 1px dashed #f3f3f3;
+    padding: 10px;
+    font-size: 1.1em;
 }
-
 .grid-selection {
-  display: inline-block;
-  width: 15%;
-  margin: 35px;
+    display: inline-block;
+    width: 15%;
+    margin: 25px 35px;
 }
-
 button {
-  border: none;
-  width: 80px;
-  height: 40px;
-  font-size: 1em;
-  letter-spacing: 2px;
+    border: none;
+    width: 80px;
+    height: 40px;
+    font-size: 1em;
+    letter-spacing: 2px;
 }
-
-.row-input{
-  display: inline-block;
-  width: 35px;
-  padding:2px;
-  outline: none;
-  text-align: center;
-  margin-left: 10px;
-  font-size: 0.9em;
+.row-input {
+    display: inline-block;
+    width: 35px;
+    padding: 2px;
+    outline: none;
+    text-align: center;
+    margin-left: 10px;
+    font-size: 0.9em;
 }
-
 .grid-size p {
-  margin-top: 30px;
+    margin-top: 30px;
 }
-
 .selected {
-  background: #ffb84d;
+    background: #ffb84d;
 }
-
 .play-game {
     margin-top: 35px;
     padding: 20px;
     width: 200px;
     font-size: 18px;
 }
-
 .play-game:hover {
-  background: #ffb84d;
+    background: #ffb84d;
 }
-
 .alert-parent {
-  background: rgba(166, 166, 166, .7);
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
+    background: rgba(166, 166, 166, .7);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
 }
-
 .alert {
-  position: absolute;
-  height: 180px;
-  width: 400px;
-  top: 30%;
-  left: 50%;
-  margin-left: -200px;
-  background: #ffc266;
-  border: 2px dashed #000;
-  color: #000;
+    position: absolute;
+    height: 180px;
+    width: 400px;
+    top: 30%;
+    left: 50%;
+    margin-left: -200px;
+    background: #ffc266;
+    border: 2px dashed #000;
+    color: #000;
 }
-
 .closeAlertBox {
-  padding: 5px;
-  margin-top: 30px;
-  text-decoration: underline;
+    padding: 5px;
+    margin-top: 30px;
+    text-decoration: underline;
 }
 
 /******************************************************
@@ -146,52 +128,71 @@ ddd
 ******************************************************/
 
 .player1, .player2 {
-  width: 20%;
-  height: 580px;
-  display: inline-block;
-  padding: 50px 0;
-  font-size: 1.2em;
-  float: left;
-  text-align: center;
-  box-sizing: border-box;
+    width: 20%;
+    height: 520px;
+    display: inline-block;
+    padding: 50px 0;
+    font-size: 1.7em;
+    float: left;
+    text-align: center;
+    box-sizing: border-box;
 }
-
 .gamearea {
-  width: 60%;
-  height: 580px;
-  margin: 0 auto;
-  display: inline-block;
-  float: left;
-  color: #000;
+    width: 60%;
+    height: 520px;
+    margin: 0 auto;
+    display: inline-block;
+    float: left;
+    color: #000;
 }
-
 .row {
-  height: 50px;
-  display: flex;
+    height: 50px;
+    display: flex;
 }
-
 .col {
-  border: 1px solid #000;
-  display: inline-block;
-  background: #fff;
+    border: 1px solid #000;
+    display: inline-block;
+    background: #fff;
+    text-align: center;
 }
-
-.your-turn{
-  color: #ffb84d;
+.your-turn {
+    color: #ffb84d;
 }
-
 h1 {
-  font-size: 3em;
+    font-size: 3em;
 }
-
-footer{
-  width: 70%;
-  height:50px;
-  margin: 0 auto;
-  text-align: center;
-  border: 1px dashed #f3f3f3;
+footer {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    border: 1px dashed #f3f3f3;
+    font-size: 1.3em;
 }
-
 footer p {
-  display: inline-block;
+    display: inline-block;
+    padding: 20px;
+    margin: 0;
+}
+
+.end-message{
+  background: #ffb84d;
+  position: absolute;
+  top: 35%;
+  width: 60%;
+  right: 20%;
+  text-align: center;
+  display: none;
+}
+
+.end-message p {
+  font-size: 1.9em;
+  padding: 10px 5px 0px;
+  text-shadow: 2px 1px 2px #504f4f;
+}
+
+.end-message button {
+  width: 200px;
+  border: 1px dashed #000;
+  height: 45px;
+  margin-bottom: 35px;
 }
