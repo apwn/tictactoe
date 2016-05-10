@@ -39,7 +39,7 @@ text-align: center;
 .player1-input, .player2-input{
   width: 49%;
   display: inline-block;
-
+  padding: 10px 0 50px;
 }
 
 .name-text {
@@ -51,12 +51,14 @@ text-align: center;
 }
 
 .grid-size {
-  height: 50px;
+  height: auto;
+  margin-top: 50px;
 }
 
 .grid-selection {
   display: inline-block;
   width: 15%;
+  margin: 40px;
 }
 
 button {
@@ -77,6 +79,11 @@ button {
 
 .selected {
   background: blue;
+}
+
+.play-game {
+    margin-top: 30px;
+    padding: 20px;
 }
 
 /******************************************************
