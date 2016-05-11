@@ -147,6 +147,16 @@ ddd
     text-align: center;
     box-sizing: border-box;
 }
+
+.player1 p, .player2 p{
+  margin: 0 0 20px;;
+}
+
+.number-wins{
+  font-size: 1.5rem;
+  padding-top: 80px;
+}
+
 .gamearea {
     width: 60%;
     height: 520px;

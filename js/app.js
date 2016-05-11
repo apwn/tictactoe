@@ -24,6 +24,8 @@ $(function() {
     var currentPlayer;
     var winner;
     var totalMoves = 0;
+    var numberOfWinsP1;
+    var numberOfWinsP2;
 
     //var playerGame = {};
 
@@ -39,8 +41,8 @@ $(function() {
     ////////////////////////////////////////////////
 
     function generateGameArea() {
-        $('.player1').text(player1);
-        $('.player2').text(player2);
+        $('.player1').html('<p>'+player1+'</p><p class="number-wins">number of wins</p><p>'+numberOfWinsP1+'</p>');
+        $('.player2').html('<p>'+player2+'</p><p class="number-wins">number of wins</p><p>'+numberOfWinsP2+'</p>');
         currentPlayer = player1;
         for (var r = 0; r < numberOfRows; r++) {
             $('<div>', {
@@ -152,6 +154,7 @@ $(function() {
             console.log(totalMatchesP1);
             if (totalMatchesP1 === elementsToWin) {
               winner = player1;
+              numberOfWinsP1++;
               winnerDisplay();
               return winner;
             }
@@ -160,6 +163,7 @@ $(function() {
             totalMatchesP2++;
             if (totalMatchesP2 === elementsToWin) {
               winner = player2;
+              numberOfWinsP2++;
               winnerDisplay();
               return winner;
             }
@@ -190,6 +194,7 @@ $(function() {
                 if (totalMatchesP1 === elementsToWin) {
                     console.log('WINNER ' + player1);
                     winner = player1;
+                    numberOfWinsP1++;
                     winnerDisplay();
                     return winner;
                 }
@@ -199,6 +204,7 @@ $(function() {
                 if (totalMatchesP2 === elementsToWin) {
                     console.log('WINNER ' + player2);
                     winner = player2;
+                    numberOfWinsP2++;
                     winnerDisplay();
                     return winner;
                 }
@@ -237,11 +243,13 @@ $(function() {
             if (totalMatchesP1 === elementsToWin || totalMatchesOppP1 === elementsToWin) {
                 console.log('WINNER DIAGONALLY ' + player1);
                 winner = player1;
+                numberOfWinsP1++;
                 winnerDisplay();
                 return winner;
             } else if (totalMatchesP2 === elementsToWin || totalMatchesOppP2 === elementsToWin) {
                 console.log('WINNER DIAGONALLY ' + player2);
                 winner = player2;
+                numberOfWinsP2++;
                 winnerDisplay();
                 return winner;
             }
@@ -335,11 +343,16 @@ $(function() {
       var inputPlayer2 = $('input[name="name-player2"]').val();
       var sizeBoxSelected = $('.grid-selection button').hasClass('selected');
       var sizeBoxNumber = $('.selected').text()[0];
+      player1 = inputPlayer1;
+      player2 = inputPlayer2;
+      numberOfWinsP1 = 0;
+      numberOfWinsP2 = 0;
+      elementsToWin = parseInt($('.elements-input').val());
       var rowInput = $('.row-input').val();
       if (rowInput.length === 0) {
           rowInput = false;
       }
-      console.log(inputPlayer1);
+
       if (!inputPlayer1 || !inputPlayer2) {
           $('<div>', {
               class: 'alert-parent'
@@ -354,24 +367,22 @@ $(function() {
           $('<div>', {
               class: 'alert'
           }).html('<p><br>Sorry I can\'t read your mind...<br><br>You need to tell me the size of the grid</p><p class="closeAlertBox">(close window)</p>').appendTo('.alert-parent');
+      } else if (elementsToWin > numberOfRows || elementsToWin < 2) {
+          $('<div>', {
+              class: 'alert-parent'
+          }).appendTo('.splash');
+          $('<div>', {
+              class: 'alert'
+          }).html('<p><br>Number of elements in a row to win is not valid!<br><br>It should be at least 2 and not higher than the number of rows</p><p class="closeAlertBox">(close window)</p>').appendTo('.alert-parent');
+
       } else if ((sizeBoxSelected && rowInput) || sizeBoxSelected) {
           numberOfRows = parseInt(sizeBoxNumber);
           numberOfCols = parseInt(sizeBoxNumber);
-          elementsToWin = parseInt(sizeBoxNumber);
-          player1 = inputPlayer1;
-          player2 = inputPlayer2;
-          elementsToWin = parseInt($('.elements-input').val());
-          //$('.play-game').off('click');
           generateGameArea();
           $('.splash').css('display', 'none');
       } else if (rowInput) {
           numberOfRows = parseInt(rowInput);
           numberOfCols = parseInt(rowInput);
-          elementsToWin = parseInt(rowInput);
-          player1 = inputPlayer1;
-          player2 = inputPlayer2;
-          elementsToWin = parseInt($('.elements-input').val());
-          //$('.play-game').off('click');
           generateGameArea();
           $('.splash').css('display', 'none');
       }
