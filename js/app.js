@@ -147,11 +147,11 @@ $(function() {
         var totalMatchesP1 = 0;
         var totalMatchesP2 = 0;
         for (var i = 0; i < row.length; i++) {
-          console.log(row[i]);
+          //console.log(row[i]);
           if (row[i] === player1) {
-            console.log('isplayer1');
+            //console.log('isplayer1');
             totalMatchesP1++;
-            console.log(totalMatchesP1);
+            //console.log(totalMatchesP1);
             if (totalMatchesP1 === elementsToWin) {
               winner = player1;
               numberOfWinsP1++;
@@ -214,23 +214,46 @@ $(function() {
 
     //FIND WINNER DIAGONALLY
     function diagonalWinner() {
-        var index = 0;
+        // var index = 0;
         var totalMatchesP1 = 0;
         var totalMatchesP2 = 0;
         var totalMatchesOppP1 = 0;
         var totalMatchesOppP2 = 0;
-        var rightToLeft = numberOfRows - 1;
+        var rightToLeft = elementsToWin - 1;
+        //for (prop2 in gameArea){
+          // var row = gameArea[prop2];
+          // for (var i = 0; i < row.length; i++) {
+          //     if (row[i] === player1) {
+          //         var player1Position = [i];
+          //     }
+          //     if (row[i] === player2) {
+          //         var player2Position = [i];
+          //     }
+          // }
+      //  }
+        //console.log(player1Position);
         for (prop in gameArea) {
+          var row = gameArea[prop];
+          for (var i = 0; i < row.length; i++) {
+              if (row[i] === player1) {
+                  var player1Position = [i];
+              }
+              if (row[i] === player2) {
+                  var player2Position = [i];
+              }
+          }
 
-            var position = gameArea[prop][index];
+            var positionP1 = gameArea[prop][player1Position];
+            var positionP2 = gameArea[prop][player2Position];
             var positionOpp = gameArea[prop][rightToLeft];
-            if (position === player1) {
+          
+            if (positionP1 === player1) {
                 totalMatchesP1++;
-                index++;
+                player1Position++;
             }
-            if (position === player2) {
+            if (positionP2 === player2) {
                 totalMatchesP2++;
-                index++;
+                player2Position++;
             }
             if (positionOpp === player1) {
                 rightToLeft--;
