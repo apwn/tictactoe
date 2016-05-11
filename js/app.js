@@ -108,8 +108,8 @@ $(function() {
             }
             $('footer').html('<p>' + currentPlayer + ' it\'s your turn');
             rowWinner();
-            verticalWinner();
-            diagonalWinner();
+            //verticalWinner();
+            //diagonalWinner();
             draw();
             console.log(gameArea);
 
@@ -144,23 +144,40 @@ $(function() {
     function rowWinner(){
       for (prop in gameArea){
         var row = gameArea[prop];
-        var totalMatchesP1 = 0;
+
         var totalMatchesP2 = 0;
         for (var i = 0; i < row.length; i++) {
           //console.log(row[i]);
           if (row[i] === player1) {
-            //console.log('isplayer1');
-            totalMatchesP1++;
-            //console.log(totalMatchesP1);
+            //console.log('working');
+            var indexPlayer = i;
+            var stopPoint = indexPlayer + elementsToWin;
+            var positionPlayer = row[indexPlayer]
+            var totalMatchesP1 = 0;
+            for (indexPlayer; indexPlayer<stopPoint; indexPlayer++) {
+              if (row[indexPlayer] === player1) {
+                totalMatchesP1++;
+                console.log(totalMatchesP1);
+              }
+            }
             if (totalMatchesP1 === elementsToWin) {
-              winner = player1;
-              numberOfWinsP1++;
-              winnerDisplay();
-              return winner;
+            winner = player1;
+            numberOfWinsP1++;
+            winnerDisplay();
+            return winner;
             }
           }
           if (row[i] === player2) {
-            totalMatchesP2++;
+            var indexPlayer = i;
+            var stopPoint = indexPlayer + elementsToWin;
+            var positionPlayer = row[indexPlayer]
+            var totalMatchesP2 = 0;
+            for (indexPlayer; indexPlayer<stopPoint; indexPlayer++) {
+              if (row[indexPlayer] === player2) {
+                totalMatchesP2++;
+                console.log(totalMatchesP2);
+              }
+            }
             if (totalMatchesP2 === elementsToWin) {
               winner = player2;
               numberOfWinsP2++;
@@ -171,6 +188,7 @@ $(function() {
         }
       }
     }
+
 
 
     // FIND WINNER VERTICALLY
@@ -246,7 +264,7 @@ $(function() {
             var positionP1 = gameArea[prop][player1Position];
             var positionP2 = gameArea[prop][player2Position];
             var positionOpp = gameArea[prop][rightToLeft];
-          
+
             if (positionP1 === player1) {
                 totalMatchesP1++;
                 player1Position++;
