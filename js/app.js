@@ -236,7 +236,7 @@ $(function() {
     function winnerDisplay(){
       $('.gamearea').css('opacity','0.2');
       $('.end-message')
-      .html('<p>Winner is ..... '+ winner.toUpperCase() +'</p><button type="button" name="newgame">PLAY NEW GAME</button>')
+      .html('<p>Winner is ..... '+ winner.toUpperCase() +'</p><button type="button" name="newgame">PLAY NEW GAME</button><button type="button" name="reset">START MENU</button>')
       .css('display','block');
       $('footer').html('<p>Winner is '+winner+'!</p>');
       playNewGame();
@@ -252,6 +252,13 @@ $(function() {
       $('.player2').removeClass('your-turn');
       $('.player1').removeClass('your-turn');
       generateGameArea();
+    });
+    $('button[name="reset"]').on('click', function(){
+      $('.end-message').css('display','none');
+      $('.gamearea').css('opacity','1').empty();
+      winner = undefined;
+      totalMoves = 0;
+      $('.splash').css('display','block');
     });
     }
 
@@ -280,54 +287,55 @@ $(function() {
     ////////////////////////////////////////////////
 
 
-    $('.play-game').on('click', function() {
+    $('.play-game').on('click',startMenu);
 
-        var inputPlayer1 = $('input[name="name-player1"]').val();
-        var inputPlayer2 = $('input[name="name-player2"]').val();
-        var sizeBoxSelected = $('.grid-selection button').hasClass('selected');
-        var sizeBoxNumber = $('.selected').text()[0];
-        var rowInput = $('.row-input').val();
-        if (rowInput.length === 0) {
-            rowInput = false;
-        }
-        console.log(inputPlayer1);
-        if (!inputPlayer1 || !inputPlayer2) {
-            $('<div>', {
-                class: 'alert-parent'
-            }).appendTo('.splash');
-            $('<div>', {
-                class: 'alert'
-            }).html('<p><br>You don\'t want to tell me your name?<br><br>I\'m not allowed to talk to strangers... Sorry</p><p class="closeAlertBox">(close window)</p>').appendTo('.alert-parent');
-        } else if (!sizeBoxSelected && !rowInput) {
-            $('<div>', {
-                class: 'alert-parent'
-            }).appendTo('.splash');
-            $('<div>', {
-                class: 'alert'
-            }).html('<p><br>Sorry I can\'t read your mind...<br><br>You need to tell me the size of the grid</p><p class="closeAlertBox">(close window)</p>').appendTo('.alert-parent');
-        } else if ((sizeBoxSelected && rowInput) || sizeBoxSelected) {
-            numberOfRows = parseInt(sizeBoxNumber);
-            numberOfCols = parseInt(sizeBoxNumber);
-            player1 = inputPlayer1;
-            player2 = inputPlayer2;
-            $('.play-game').off('click');
-            generateGameArea();
-            $('.splash').css('display', 'none');
-        } else if (rowInput) {
-            numberOfRows = parseInt(rowInput);
-            numberOfCols = parseInt(rowInput);
-            player1 = inputPlayer1;
-            player2 = inputPlayer2;
-            $('.play-game').off('click');
-            generateGameArea();
-            $('.splash').css('display', 'none');
-        }
+    function startMenu(){
+      console.log('workingnngngng?');
+      var inputPlayer1 = $('input[name="name-player1"]').val();
+      var inputPlayer2 = $('input[name="name-player2"]').val();
+      var sizeBoxSelected = $('.grid-selection button').hasClass('selected');
+      var sizeBoxNumber = $('.selected').text()[0];
+      var rowInput = $('.row-input').val();
+      if (rowInput.length === 0) {
+          rowInput = false;
+      }
+      console.log(inputPlayer1);
+      if (!inputPlayer1 || !inputPlayer2) {
+          $('<div>', {
+              class: 'alert-parent'
+          }).appendTo('.splash');
+          $('<div>', {
+              class: 'alert'
+          }).html('<p><br>You don\'t want to tell me your name?<br><br>I\'m not allowed to talk to strangers... Sorry</p><p class="closeAlertBox">(close window)</p>').appendTo('.alert-parent');
+      } else if (!sizeBoxSelected && !rowInput) {
+          $('<div>', {
+              class: 'alert-parent'
+          }).appendTo('.splash');
+          $('<div>', {
+              class: 'alert'
+          }).html('<p><br>Sorry I can\'t read your mind...<br><br>You need to tell me the size of the grid</p><p class="closeAlertBox">(close window)</p>').appendTo('.alert-parent');
+      } else if ((sizeBoxSelected && rowInput) || sizeBoxSelected) {
+          numberOfRows = parseInt(sizeBoxNumber);
+          numberOfCols = parseInt(sizeBoxNumber);
+          player1 = inputPlayer1;
+          player2 = inputPlayer2;
+          //$('.play-game').off('click');
+          generateGameArea();
+          $('.splash').css('display', 'none');
+      } else if (rowInput) {
+          numberOfRows = parseInt(rowInput);
+          numberOfCols = parseInt(rowInput);
+          player1 = inputPlayer1;
+          player2 = inputPlayer2;
+          //$('.play-game').off('click');
+          generateGameArea();
+          $('.splash').css('display', 'none');
+      }
 
-        $('.closeAlertBox').on('click', function() {
-            $('.alert-parent').css('display', 'none');
-        })
-
-    })
+      $('.closeAlertBox').on('click', function() {
+          $('.alert-parent').css('display', 'none');
+      })
+    }
 
 
 

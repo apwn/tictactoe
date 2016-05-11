@@ -195,5 +195,9 @@ footer p {
   width: 200px;
   border: 1px dashed #000;
   height: 45px;
-  margin-bottom: 35px;
+  margin: 0px 15px 35px;
+}
+
+.end-message button:last-child {
+  background: rgb(251, 180, 180);
 }
