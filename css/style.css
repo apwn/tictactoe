@@ -76,15 +76,24 @@ button {
     letter-spacing: 2px;
     background: #f3f3f3;
 }
-.row-input {
+.row-input, .elements-input {
     display: inline-block;
     width: 35px;
     padding: 2px;
     outline: none;
     text-align: center;
-    margin-left: 10px;
+    margin: 0 10px;
     font-size: 0.9em;
 }
+
+.info{
+  font-size: 0.7em;
+}
+
+.info-text {
+  color: tomato;
+}
+
 .grid-size p {
     margin-top: 30px;
 }
