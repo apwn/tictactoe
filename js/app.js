@@ -107,8 +107,9 @@ $(function() {
                 alert("already played");
             }
             $('footer').html('<p>' + currentPlayer + ' it\'s your turn');
+            console.log('total moves: '+totalMoves);
             rowWinner();
-            //verticalWinner();
+            verticalWinner();
             //diagonalWinner();
             draw();
             console.log(gameArea);
@@ -144,20 +145,18 @@ $(function() {
     function rowWinner(){
       for (prop in gameArea){
         var row = gameArea[prop];
-
-        var totalMatchesP2 = 0;
         for (var i = 0; i < row.length; i++) {
           //console.log(row[i]);
           if (row[i] === player1) {
             //console.log('working');
             var indexPlayer = i;
             var stopPoint = indexPlayer + elementsToWin;
-            var positionPlayer = row[indexPlayer]
+            var positionPlayer = row[indexPlayer];
             var totalMatchesP1 = 0;
             for (indexPlayer; indexPlayer<stopPoint; indexPlayer++) {
               if (row[indexPlayer] === player1) {
                 totalMatchesP1++;
-                console.log(totalMatchesP1);
+                //console.log(totalMatchesP1);
               }
             }
             if (totalMatchesP1 === elementsToWin) {
@@ -175,7 +174,7 @@ $(function() {
             for (indexPlayer; indexPlayer<stopPoint; indexPlayer++) {
               if (row[indexPlayer] === player2) {
                 totalMatchesP2++;
-                console.log(totalMatchesP2);
+                //console.log(totalMatchesP2);
               }
             }
             if (totalMatchesP2 === elementsToWin) {
@@ -192,42 +191,133 @@ $(function() {
 
 
     // FIND WINNER VERTICALLY
-    function verticalWinner() {
-        for (prop in gameArea) {
+    // function verticalWinner() {
+    //     for (prop in gameArea) {
+    //         var totalMatchesP1 = 0;
+    //         var totalMatchesP2 = 0;
+    //         var row = gameArea[prop];
+    //         for (var i = 0; i < row.length; i++) {
+    //             if (row[i] === player1) {
+    //                 var player1Position = [i];
+    //             }
+    //             if (row[i] === player2) {
+    //                 var player2Position = [i];
+    //             }
+    //         }
+    //     }
+    //     for (prop2 in gameArea) {
+    //         if (gameArea[prop2][player1Position] === player1) {
+    //             totalMatchesP1++;
+    //             if (totalMatchesP1 === elementsToWin) {
+    //                 console.log('WINNER ' + player1);
+    //                 winner = player1;
+    //                 numberOfWinsP1++;
+    //                 winnerDisplay();
+    //                 return winner;
+    //             }
+    //         }
+    //         if (gameArea[prop2][player2Position] === player2) {
+    //             totalMatchesP2++;
+    //             if (totalMatchesP2 === elementsToWin) {
+    //                 console.log('WINNER ' + player2);
+    //                 winner = player2;
+    //                 numberOfWinsP2++;
+    //                 winnerDisplay();
+    //                 return winner;
+    //             }
+    //         }
+    //     }
+    // }
+
+    function verticalWinner(){
+      //console.log(gameArea[0]);
+      var indexOfGameArea = [];
+      for (prop2 in gameArea){
+        indexOfGameArea.push(prop2);
+      }
+      console.log(indexOfGameArea);
+      for (prop in gameArea){
+        var row = gameArea[prop];
+        for (var i = 0; i < row.length; i++) {
+          //console.log(row[i]);
+          if (row[i] === player1) {
+            //console.log('working');
+            var playerCol = i;
+            var playerRow = prop;
+            var playerIndex = indexOfGameArea.indexOf(prop);
+            //console.log(playerRow);
+            console.log(playerIndex);
+            var stopPoint = playerIndex + elementsToWin;
+            console.log(stopPoint);
             var totalMatchesP1 = 0;
-            var totalMatchesP2 = 0;
-            var row = gameArea[prop];
-            for (var i = 0; i < row.length; i++) {
-                if (row[i] === player1) {
-                    var player1Position = [i];
-                }
-                if (row[i] === player2) {
-                    var player2Position = [i];
-                }
-            }
-        }
-        for (prop2 in gameArea) {
-            if (gameArea[prop2][player1Position] === player1) {
+            for (playerIndex; playerIndex < stopPoint; playerIndex++){
+              var rowProp = indexOfGameArea[playerIndex];
+              if(!rowProp){
+                console.log('rowprop false');
+                continue;
+              }
+              console.log(rowProp);
+              var arrayLoc = gameArea[rowProp][playerCol];
+              console.log(arrayLoc);
+              if (arrayLoc === player1) {
                 totalMatchesP1++;
+                console.log(totalMatchesP1);
                 if (totalMatchesP1 === elementsToWin) {
-                    console.log('WINNER ' + player1);
-                    winner = player1;
-                    numberOfWinsP1++;
-                    winnerDisplay();
-                    return winner;
+                  winner = player1;
+                  numberOfWinsP1++;
+                  winnerDisplay();
+                  return winner;
                 }
+              }
             }
-            if (gameArea[prop2][player2Position] === player2) {
+          }
+          if (row[i] === player2) {
+            //console.log('working');
+            var playerCol = i;
+            var playerRow = prop;
+            var playerIndex = indexOfGameArea.indexOf(prop);
+            //console.log(playerRow);
+            console.log(playerIndex);
+            var stopPoint = playerIndex + elementsToWin;
+            console.log(stopPoint);
+            var totalMatchesP2 = 0;
+            for (playerIndex; playerIndex < stopPoint; playerIndex++){
+              var rowProp = indexOfGameArea[playerIndex];
+              if(!rowProp){
+                console.log('rowprop false');
+                continue;
+              }
+              console.log(rowProp);
+              var arrayLoc = gameArea[rowProp][playerCol];
+              console.log(arrayLoc);
+              if (arrayLoc === player2) {
                 totalMatchesP2++;
+                console.log(totalMatchesP2);
                 if (totalMatchesP2 === elementsToWin) {
-                    console.log('WINNER ' + player2);
-                    winner = player2;
-                    numberOfWinsP2++;
-                    winnerDisplay();
-                    return winner;
+                  winner = player2;
+                  numberOfWinsP2++;
+                  winnerDisplay();
+                  return winner;
                 }
+              }
             }
+          }
         }
+      }
+      // var totalMatchesP1 = 0;
+      // for (playerIndex; playerIndex < stopPoint; playerIndex++){
+      //   var rowProp = indexOfGameArea[playerIndex];
+      //   console.log(rowProp);
+      //   var arrayLoc = gameArea[rowProp][playerCol];
+      //   console.log(arrayLoc);
+      //   if (arrayLoc === player1) {
+      //     totalMatchesP1++;
+      //     console.log(totalMatchesP1);
+      //     if (totalMatchesP1 === elementsToWin) {
+      //       console.log('P1 is a super cool wiiner');
+      //     }
+      //   }
+      // }
     }
 
     //FIND WINNER DIAGONALLY
@@ -300,11 +390,12 @@ $(function() {
     // DRAW
     function draw() {
         var totalMovesPossible = numberOfRows * numberOfCols;
+        console.log('total moves possible: '+totalMovesPossible);
         if (totalMoves === totalMovesPossible && !winner) {
             console.log('draw');
             $('.gamearea').css('opacity','0.2');
             $('.end-message')
-            .html('<p>... DRAW ... </p><button type="button" name="newgame">PLAY NEW GAME</button>')
+            .html('<p>--- DRAW ---</p><button type="button" name="newgame">PLAY NEW GAME</button>')
             .css('display','block');
             playNewGame();
         }
