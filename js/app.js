@@ -426,7 +426,7 @@ $(function() {
 
     ////////////////////////////////////////////////
     // SPLASH PAGE
-    // FIND SIZE OF GRID
+    // FIND SIZE OF GRID & USER TOKEN
     ////////////////////////////////////////////////
 
     $('.player1-input img').on('click', function() {
