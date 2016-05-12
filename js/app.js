@@ -2,11 +2,11 @@
 TIC TAC TOE
 Version 0.5
 
-line 43: Creation of Game Area
-line 72: User Turns
-line 124: Find the Winner Functions
-line 420: START MENU - find grid size
-line 450: START MENU - play button
+line 42: Creation of Game Area
+line 75: User Turns
+line 129: Find the Winner Functions
+line 428: START MENU - find grid size
+line 508: START MENU - play button
 **********************************************/
 
 // Wait for page to load before running any JS
@@ -336,6 +336,7 @@ $(function() {
                         }
                         if (arrayLoc === player2) {
                             totalMatchesP2++;
+                            console.log('total matches p2: '+totalMatchesP2);
                             if (totalMatchesP2 === elementsToWin) {
                                 winner = player2;
                                 numberOfWinsP2++;
@@ -414,6 +415,7 @@ $(function() {
             $('.gamearea').css('opacity', '1').empty();
             winner = undefined;
             totalMoves = 0;
+            $('.row-input').val('');
             $('.player2').removeClass('your-turn');
             $('.player1').removeClass('your-turn');
             $('.selected').removeClass('selected');
@@ -456,6 +458,7 @@ $(function() {
 
     $('.grid-size button').on('click', function() {
         var buttonValue = $(this).val();
+        console.log($(this));
         var selected = $('.selected');
         var selectedItemValue = $('.selected').val();
         if (!selected[0]) {
@@ -518,12 +521,6 @@ $(function() {
         var tokenAltP1 = $('.selected-token-p1').attr('alt');
         var tokenURLP2 = $('.selected-token-p2').attr('src');
         var tokenAltP2 = $('.selected-token-p2').attr('alt');
-        if(tokenURLP1){
-          player1Token = '<img src="' + tokenURLP1 + '" alt="' + tokenAltP2 + '" class="token" >'
-        }
-        if(tokenURLP2){
-          player2Token = '<img src="' + tokenURLP2 + '" alt="' + tokenAltP2 + '" class="token" >'
-        }
         player1 = inputPlayer1;
         player2 = inputPlayer2;
         numberOfWinsP1 = 0;
@@ -550,9 +547,17 @@ $(function() {
             }).html('<p><br>Sorry I can\'t read your mind...<br><br>You need to tell me the size of the grid</p><p class="closeAlertBox">(close window)</p>').appendTo('.alert-parent');
         }
 
+        if(tokenURLP1){
+          player1Token = '<img src="' + tokenURLP1 + '" alt="' + tokenAltP2 + '" class="token" >'
+        }
+        if(tokenURLP2){
+          player2Token = '<img src="' + tokenURLP2 + '" alt="' + tokenAltP2 + '" class="token" >'
+        }
+
         if ((sizeBoxSelected && rowInput) || sizeBoxSelected) {
             numberOfRows = parseInt(sizeBoxNumber);
             numberOfCols = parseInt(sizeBoxNumber);
+
             if (elementsToWin < 2 || elementsToWin > numberOfRows) {
                 $('<div>', {
                     class: 'alert-parent'
