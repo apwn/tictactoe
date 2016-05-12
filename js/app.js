@@ -1,10 +1,12 @@
 /**********************************************
 TIC TAC TOE
-Version 0.25
+Version 0.5
 
-line 21: Creation of Game Area
-line 34: User Turns
-line 96: Find the Winner Functions
+line 43: Creation of Game Area
+line 72: User Turns
+line 124: Find the Winner Functions
+line 420: START MENU - find grid size
+line 450: START MENU - play button
 **********************************************/
 
 // Wait for page to load before running any JS
@@ -15,12 +17,13 @@ $(function() {
     var numberOfCols;
     var gameArea = {};
     var elementsToWin;
+    var fontSize;
 
     // Player info
     var player1;
     var player2;
-    var player1Token = "X";
-    var player2Token = "O";
+    var player1Token = 'X';
+    var player2Token = 'O';
     var currentPlayer;
     var winner;
     var totalMoves = 0;
@@ -61,7 +64,7 @@ $(function() {
                 gameArea['row' + r].push('col' + c);
             }
         }
-        var fontSize = $('.col').height() * 0.75 + 'px';
+        fontSize = $('.col').height() * 0.75 + 'px';
         $('.col').css('font-size', fontSize);
         $('.player1').addClass('your-turn');
         $('footer').html('<p>' + currentPlayer + ' it\'s your turn');
@@ -90,14 +93,14 @@ $(function() {
                 gameArea[playerRow][elementToChange] = currentPlayer;
                 // Change of player
                 if (currentPlayer === player1) {
-                    $(classOfRow + ' ' + classOfCol).text(player1Token);
+                    $(classOfRow + ' ' + classOfCol).html(player1Token);
                     currentPlayer = player2;
                     $('.player2').addClass('your-turn');
                     $('.player1').removeClass('your-turn');
                     totalMoves++;
                     //$('.gamearea').off('click', '.col');
                 } else if (currentPlayer === player2) {
-                    $(classOfRow + ' ' + classOfCol).text(player2Token);
+                    $(classOfRow + ' ' + classOfCol).html(player2Token);
                     currentPlayer = player1;
                     $('.player1').addClass('your-turn');
                     $('.player2').removeClass('your-turn');
@@ -106,6 +109,8 @@ $(function() {
             } else {
                 alert("already played");
             }
+            console.log(fontSize);
+            $('.token').css('height', fontSize);
             $('footer').html('<p>' + currentPlayer + ' it\'s your turn');
             console.log('total moves: ' + totalMoves);
             rowWinner();
@@ -188,7 +193,7 @@ $(function() {
         }
     }
 
-
+    // FIND VERTICAL WINNER
     function verticalWinner() {
         var indexOfGameArea = [];
         for (prop2 in gameArea) {
@@ -258,9 +263,8 @@ $(function() {
         for (prop in gameArea) {
             var row = gameArea[prop];
             for (var i = 0; i < row.length; i++) {
-                //console.log(row[i]);
+                // FIND WINNER LEFT TO RIGHT
                 if (row[i] === player1) {
-                    //console.log('working');
                     var playerCol = i;
                     var playerRow = prop;
                     var playerIndex = indexOfGameArea.indexOf(prop);
@@ -288,6 +292,7 @@ $(function() {
                         }
                     }
                 }
+                // FIND WINNER RIGHT TO LEFT
                 if (row[i] === player1) {
                     var playerCol = i;
                     var playerRow = prop;
@@ -312,7 +317,7 @@ $(function() {
                         }
                     }
                 }
-
+                // FIND WINNER LEFT TO RIGHT
                 if (row[i] === player2) {
                     var playerCol = i;
                     var playerRow = prop;
@@ -340,6 +345,7 @@ $(function() {
                         }
                     }
                 }
+                // FIND WINNER RIGHT TO LEFT
                 if (row[i] === player2) {
                     var playerCol = i;
                     var playerRow = prop;
@@ -421,6 +427,33 @@ $(function() {
     // FIND SIZE OF GRID
     ////////////////////////////////////////////////
 
+    $('.player1-input img').on('click', function() {
+        var selectedToken = $('.selected-token-p1');
+        var selectedTokenAlt = $(this).attr('alt');
+        var selectedTokenImg = $('.selected-token-p1').attr('alt');
+        if (!selectedToken[0]) {
+            $(this).addClass('selected-token-p1');
+        } else if (selectedTokenAlt !== selectedTokenImg) {
+          $(selectedToken).removeClass('selected-token-p1');
+          $(this).addClass('selected-token-p1');
+        } else {
+            $(selected).removeClass('selected-token-p1');
+        }
+    });
+    $('.player2-input img').on('click', function() {
+        var selectedToken = $('.selected-token-p2');
+        var selectedTokenAlt = $(this).attr('alt');
+        var selectedTokenImg = $('.selected-token-p2').attr('alt');
+        if (!selectedToken[0]) {
+            $(this).addClass('selected-token-p2');
+        } else if (selectedTokenAlt !== selectedTokenImg) {
+          $(selectedToken).removeClass('selected-token-p2');
+          $(this).addClass('selected-token-p2');
+        } else {
+            $(selected).removeClass('selected-token-p2');
+        }
+    });
+
     $('.grid-size button').on('click', function() {
         var buttonValue = $(this).val();
         var selected = $('.selected');
@@ -445,9 +478,32 @@ $(function() {
         $('.elements-input').attr('value', rowInput);
     });
 
+    var clickTokenP1 = 0;
+    var clickTokenP2 = 0;
+    $(".player-token1").click(function(){
+        $(".tokens-p1").slideToggle("slow")
+        if (!clickTokenP1){
+        $(".player-token1").text('CLICK TO CLOSE').css('color','#f3f3f3');
+        clickTokenP1++;
+      } else{
+        $(".player-token1").text('PICK TOKEN P1').css('color','#ffb84d');
+        clickTokenP1--;
+      }
+    });
+    $(".player-token2").click(function(){
+        $(".tokens-p2").slideToggle("slow")
+        if (!clickTokenP2){
+        $(".player-token2").text('CLICK TO CLOSE').css('color','#f3f3f3');
+        clickTokenP2++;
+      } else{
+        $(".player-token2").text('PICK TOKEN P2').css('color','#ffb84d');
+        clickTokenP2--;
+      }
+    });
+
     ////////////////////////////////////////////////
     // PLAY BUTTON FUNCTION
-    //
+    // START MENU
     ////////////////////////////////////////////////
 
 
@@ -458,6 +514,16 @@ $(function() {
         var inputPlayer2 = $('input[name="name-player2"]').val();
         var sizeBoxSelected = $('.grid-selection button').hasClass('selected');
         var sizeBoxNumber = $('.selected').text()[0];
+        var tokenURLP1 = $('.selected-token-p1').attr('src');
+        var tokenAltP1 = $('.selected-token-p1').attr('alt');
+        var tokenURLP2 = $('.selected-token-p2').attr('src');
+        var tokenAltP2 = $('.selected-token-p2').attr('alt');
+        if(tokenURLP1){
+          player1Token = '<img src="' + tokenURLP1 + '" alt="' + tokenAltP2 + '" class="token" >'
+        }
+        if(tokenURLP2){
+          player2Token = '<img src="' + tokenURLP2 + '" alt="' + tokenAltP2 + '" class="token" >'
+        }
         player1 = inputPlayer1;
         player2 = inputPlayer2;
         numberOfWinsP1 = 0;
@@ -495,9 +561,9 @@ $(function() {
                     class: 'alert'
                 }).html('<p><br>Number of elements in a row to win is not valid!<br><br>It should be at least 2 and not higher than the number of rows</p><p class="closeAlertBox">(close window)</p>').appendTo('.alert-parent');
 
-            }else{
-              generateGameArea();
-              $('.splash').css('display', 'none');
+            } else {
+                generateGameArea();
+                $('.splash').css('display', 'none');
             }
         } else if (rowInput) {
             numberOfRows = parseInt(rowInput);
@@ -510,9 +576,9 @@ $(function() {
                     class: 'alert'
                 }).html('<p><br>Number of elements in a row to win is not valid!<br><br>It should be at least 2 and not higher than the number of rows</p><p class="closeAlertBox">(close window)</p>').appendTo('.alert-parent');
 
-            } else{
-              generateGameArea();
-              $('.splash').css('display', 'none');
+            } else {
+                generateGameArea();
+                $('.splash').css('display', 'none');
             }
 
         }

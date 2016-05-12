@@ -17,6 +17,7 @@ h1 {
     height: 540px;
 }
 
+
 /******************************************************
 SPLASH PAGE
 ******************************************************/
@@ -42,10 +43,48 @@ SPLASH PAGE
     margin: 0 auto;
 }
 .player1-input, .player2-input {
+    position: relative;
     width: 49%;
     display: inline-block;
     padding: 10px 0 40px;
 }
+
+.player-token1, .player-token2{
+  position: absolute;
+  top: 22px;
+  margin-left: 20px;
+  text-shadow: 1px 1px 1px #000;
+  color: #ffb84d;
+  transform: rotate(90deg);
+  	transform-origin: left top 0;
+}
+
+.player-token1:hover, .player-token2:hover {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.player-token2 {
+  margin-left: 25px;
+}
+
+.tokens-p2, .tokens-p1 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  margin: 0;
+  background: rgba(255, 194, 102, 1);
+  text-shadow: 1px 1px 1px #000;
+  display: none;
+}
+
+.player-input img {
+  height: 50%;
+  margin: 5px;
+}
+
 .name-text {
     outline: none;
     height: 30px;
@@ -75,6 +114,9 @@ button {
     font-size: 1em;
     letter-spacing: 2px;
     background: #f3f3f3;
+}
+button:hover {
+  background: #ffb84d;
 }
 .row-input, .elements-input {
     display: inline-block;
@@ -136,7 +178,14 @@ button {
 /******************************************************
 ddd
 ******************************************************/
-
+.token {
+  margin: 10%;
+}
+.selected-token-p1, .selected-token-p2 {
+  background: tomato;
+  border-radius: 50%;
+  border: 4px solid tomato;
+}
 .player1, .player2 {
     width: 20%;
     height: 520px;
