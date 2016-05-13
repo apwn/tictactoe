@@ -1,6 +1,8 @@
 # Tic Tac Toe on Steroids!
 ###### Version 0.5
 
+[Click HERE to play the game!](http://apwn.github.io/tictactoe/)
+
 ### Brief
 Create a Tic Tac Toe game in Javascript.
 
